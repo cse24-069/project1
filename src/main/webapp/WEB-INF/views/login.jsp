@@ -1,30 +1,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
   <title>LIBIS Login</title>
 </head>
-<body bgcolor="#e6f2ff" text="#003366"> <!-- Light blue background, dark blue text -->
+<body bgcolor="#e6f2ff" text="#003366">
 
-<center> <!-- Centers everything horizontally -->
+<center>
   <br><br>
   <font face="Verdana" size="6" color="#004080">
     <h2>LIBIS Member Login</h2>
   </font>
 
-  <!-- Error message handling -->
-  <% String error = (String) request.getAttribute("error"); %>
-  <% if (error != null) { %>
-  <font color="red" size="4"><b><%= error %></b></font>
-  <% } %>
+  <c:if test="${not empty requestScope.error}">
+    <font color="red" size="4"><b><c:out value="${requestScope.error}"/></b></font>
+  </c:if>
 
   <br><br>
 
-  <!-- Using a table to create a "box" around the form -->
   <table border="2" cellpadding="15" cellspacing="0" bgcolor="#ffffff" bordercolor="#004080">
     <tr>
       <td>
-        <form action="LoginServlet" method="POST">
+        <form action="${pageContext.request.contextPath}/login" method="POST">
           <font face="Arial" size="4" color="#333333">
             <label for="email">Email:</label>
           </font><br>
